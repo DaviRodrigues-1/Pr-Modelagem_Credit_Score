@@ -1,84 +1,119 @@
-📊 Customer Data Analysis – Missing Value Strategy & Exploratory Insights
-📌 Overview
+# 📊 Customer Data Analysis – Missing Value Strategy & Exploratory Insights
 
-This project presents an exploratory data analysis (EDA) and preprocessing workflow applied to a customer dataset with 164 observations.
+## 📌 Overview
 
-A key challenge addressed in this project was handling missing values in the Age variable (approximately 20% missing), ensuring statistical consistency without distorting the data distribution.
+This project presents an exploratory data analysis (EDA) and preprocessing workflow applied to a customer dataset containing 164 observations.
 
-The notebook demonstrates structured decision-making in data cleaning, visualization, and preparation for modeling.
+A key challenge addressed in this project was handling missing values in the **Age** variable (~20% missing data) while preserving statistical integrity and avoiding distribution distortion.
 
-🎯 Objectives
+The notebook demonstrates structured reasoning in data cleaning, visualization, and preparation for machine learning.
 
-Perform exploratory data analysis (EDA)
+---
 
-Identify and analyze missing values
+## 🎯 Objectives
 
-Apply statistically coherent imputation strategies
+- Perform exploratory data analysis (EDA)
+- Identify and analyze missing values
+- Apply statistically coherent imputation strategies
+- Preserve distribution consistency
+- Prepare the dataset for modeling
 
-Preserve distribution integrity
+---
 
-Prepare the dataset for machine learning modeling
+## 📂 Dataset Summary
 
-📂 Dataset Summary
+- **Total rows:** 164  
+- **Missing values in Age:** 34 (~20%)  
+- **Key variables:**
+  - Age
+  - Marital Status
+  - (Other relevant features)
 
-Total rows: 164
+---
 
-Target variable: (if applicable, insert here)
+## ⚠️ Main Challenge: Missing Values in Age
 
-Key variables:
+A simple median imputation created artificial peaks in the distribution, distorting visual analysis.
 
-Age
+To solve this, a **group-based mean imputation by Marital Status** was applied:
 
-Marital Status
-
-(add other relevant features)
-
-⚠️ Key Challenge: Missing Values in Age
-
-34 missing values (~20% of dataset)
-
-Simple median imputation created artificial distribution spikes
-
-Required a more structured solution
-
-🧠 Solution Strategy
-
-Instead of global median imputation, Age was imputed using group-based mean imputation by Marital Status, preserving demographic structure:
-
+```python
 df['Age'] = df.groupby('Marital Status')['Age'] \
               .transform(lambda x: x.fillna(x.mean()))
-Why this approach?
+```
 
-Maintains relational consistency between Age and Marital Status
+### ✅ Why This Approach?
 
-Avoids artificial distribution peaks
+- Preserves the relationship between Age and Marital Status
+- Avoids artificial clustering
+- Reduces statistical bias
+- Produces more reliable visualizations and modeling inputs
 
-Reduces statistical bias
+---
 
-Produces more reliable visualizations and modeling inputs
+## 📊 Exploratory Analysis
 
-📊 Exploratory Analysis
+The project includes:
 
-The notebook includes:
+- Distribution analysis
+- Age vs Marital Status visualization
+- Missing value diagnostics
+- Post-imputation validation
 
-Distribution analysis
+---
 
-Relationship between Age and Marital Status
+## 🛠️ Technologies Used
 
-Visual correlation insights
+- Python 3
+- Pandas
+- NumPy
+- Matplotlib
+- Plotly
+- Scikit-learn
 
-Data balance evaluation after imputation
+---
 
-🛠️ Technologies Used
+## 🚀 How to Run
 
-Python 3
+Clone the repository:
 
-Pandas
+```bash
+git clone https://github.com/your-username/your-repository-name.git
+```
 
-NumPy
+Install dependencies:
 
-Matplotlib
+```bash
+pip install -r requirements.txt
+```
 
-Plotly
+Run the notebook:
 
-Scikit-learn
+```bash
+jupyter notebook
+```
+
+---
+
+## 📈 Key Takeaways
+
+- Missing data handling requires statistical reasoning, not only technical fixes.
+- Group-based imputation can preserve structural patterns better than global metrics.
+- Data preprocessing decisions directly impact model reliability.
+
+---
+
+## 📌 Future Improvements
+
+- Predictive imputation (regression-based)
+- Feature engineering
+- Model training & validation
+- Larger dataset expansion
+
+---
+
+## 👤 Author
+
+Davi Rodrigues Trindade
+Data Science Student  
+LinkedIn: https://www.linkedin.com/in/davirodriguestrindade/
